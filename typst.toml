@@ -1,0 +1,13 @@
+[package]
+name = "invoice-harness"
+version = "0.1.0"
+entrypoint = "src/lib.typ"
+authors = ["Niklas Eicker <git@nikl.me>"]
+license = "MIT"
+description = "Simplify creating ZUGFeRD electronic invoices"
+homepage = "https://github.com/oicana/invoice-harness"
+repository = "https://github.com/oicana/invoice-harness"
+keywords = ["zugferd", "invoice"]
+categories = ["scripting", "utility"]
+compiler = "0.12.0"
+exclude = ["/tests/*"]
