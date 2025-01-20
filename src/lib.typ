@@ -14,6 +14,5 @@
   /// -> bytes | str
   factur-x,
 ) = {
-  pdf.embed("../factur-x.xml", factur-x, mime-type: "text/xml", relationship: "data")
-  // Todo: ZUGFeRD metadata after typst/typst#5667
+  pdf.embed("../factur-x.xml", factur-x, mime-type: "text/xml", relationship: "alternative")
 }
