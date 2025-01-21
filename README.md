@@ -1,6 +1,6 @@
 # invoice-harness
 
-This plugin simplifies creating [ZUGFeRD] electronic invoices with [Typst].
+This plugin simplifies creating [factur-x/ZUGFeRD][factur-x] electronic invoices with [Typst].
 
 ```typst
 #import "@preview/invoice-harness:0.1.0": *
@@ -22,10 +22,11 @@ For file formatting, use [`typstyle`][typstyle].
 
 ## What's up with the package name?
 
-The [ZUGFeRD] standard is named close to the German word "Zugpferd", which means "draft horse". This package is the harness to attach a ZUGFeRD to your invoice ;)
+The [ZUGFeRD][factur-x] standard is named close to the German word "Zugpferd", which means "draft horse". This package is the harness to attach a ZUGFeRD to your invoice ;)
 
 
 [Typst]: "https://typst.app/"
+[factur-x]: "https://fnfe-mpe.org/factur-x/factur-x_en/"
 [typst/typst#5667]: "https://github.com/typst/typst/issues/5667"
 [typst-test]: https://github.com/tingerrr/typst-test
 [typstyle]: https://github.com/Enter-tainer/typstyle
