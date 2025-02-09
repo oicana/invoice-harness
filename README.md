@@ -20,6 +20,8 @@ the package's installation instructions.
 
 For file formatting, use [`typstyle`][typstyle].
 
+You can install the package locally with [`typship install local`][typship].
+
 ## What's up with the package name?
 
 The [ZUGFeRD][factur-x] standard is named close to the German word "Zugpferd", which means "draft horse". This package is the harness to attach a ZUGFeRD to your invoice ;)
@@ -30,3 +32,4 @@ The [ZUGFeRD][factur-x] standard is named close to the German word "Zugpferd", w
 [typst/typst#5667]: https://github.com/typst/typst/issues/5667
 [typst-test]: https://github.com/tingerrr/typst-test
 [typstyle]: https://github.com/Enter-tainer/typstyle
+[typship]: https://github.com/sjfhsjfh/typship
