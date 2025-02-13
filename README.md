@@ -15,7 +15,7 @@ To create a valid electronic invoice, be sure to export the PDF document as PDF/
 
 ## Development
 
-The package includes automated tests using [`typst-test`][typst-test]. Run them with `typst-test run` after following
+The package includes automated tests using [`tytanic`][tytanic]. Run them with `tt run` after following
 the package's installation instructions.
 
 For file formatting, use [`typstyle`][typstyle].
@@ -30,6 +30,6 @@ The [ZUGFeRD][factur-x] standard is named close to the German word "Zugpferd", w
 [Typst]: https://typst.app/
 [factur-x]: https://fnfe-mpe.org/factur-x/factur-x_en/
 [typst/typst#5667]: https://github.com/typst/typst/issues/5667
-[typst-test]: https://github.com/tingerrr/typst-test
+[tytanic]: https://github.com/tingerrr/tytanic
 [typstyle]: https://github.com/Enter-tainer/typstyle
 [typship]: https://github.com/sjfhsjfh/typship
