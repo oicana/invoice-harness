@@ -9,5 +9,5 @@ homepage = "https://github.com/oicana/invoice-harness"
 repository = "https://github.com/oicana/invoice-harness"
 keywords = ["zugferd", "invoice"]
 categories = ["scripting", "utility"]
-compiler = "0.12.0"
+compiler = "0.13.0"
 exclude = ["*/tests/**"]
