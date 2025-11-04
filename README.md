@@ -3,7 +3,7 @@
 This plugin simplifies creating [factur-x/ZUGFeRD][factur-x] electronic invoices with [Typst].
 
 ```typst
-#import "@preview/invoice-harness:0.1.0": *
+#import "@preview/invoice-harness:0.1.1": *
 
 #let factur-x = read("factur-x.xml")
 #zugferd(factur-x)
