@@ -80,9 +80,9 @@
     fx-schema.conformance-level(profile),
   ))
 
-  pdf.embed(
+  pdf.attach(
     "../factur-x.xml",
-    xml,
+    bytes(xml),
     mime-type: "text/xml",
     relationship: "alternative",
     description: description,

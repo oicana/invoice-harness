@@ -1,0 +1,72 @@
+name: validate e-invoices
+
+on:
+  push:
+  pull_request:
+
+env:
+  TYPST_REPO: oicana/typst
+  TYPST_REF: custom-pdf-metadata
+  KRILLA_REPO: oicana/krilla
+  KRILLA_REF: custom-pdf-metadata
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout invoice-harness
+        uses: actions/checkout@v4
+        with:
+          path: invoice-harness
+
+      - name: Checkout Typst
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.TYPST_REPO }}
+          ref: ${{ env.TYPST_REF }}
+          path: typst
+
+      - name: Checkout krilla
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ env.KRILLA_REPO }}
+          ref: ${{ env.KRILLA_REF }}
+          path: krilla
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo build
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: typst
+
+      - name: Build custom typst CLI
+        working-directory: typst
+        run: cargo build --release -p typst-cli
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Fetch latest Mustangproject CLI
+        working-directory: invoice-harness
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: ./scripts/fetch-mustang.sh
+
+      - name: Validate all profiles
+        working-directory: invoice-harness
+        env:
+          TYPST: ${{ github.workspace }}/typst/target/release/typst
+        run: ./scripts/validate-invoices.sh
+
+      - name: Upload PDFs and validation reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: invoice-validation-output
+          path: invoice-harness/out/
+          if-no-files-found: ignore
