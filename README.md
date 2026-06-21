@@ -5,8 +5,8 @@ This plugin simplifies creating [factur-x/ZUGFeRD][factur-x] electronic invoices
 ```typst
 #import "@preview/invoice-harness:0.1.1": *
 
-#let factur-x = read("factur-x.xml")
-#zugferd(factur-x, profiles.en16931)
+#let invoice-xml = read("factur-x.xml")
+#factur-x(invoice-xml, profiles.en16931)
 ```
 
 To create a valid electronic invoice, be sure to export the PDF document as PDF/A-3b.

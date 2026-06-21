@@ -1,4 +1,4 @@
 #import "../../../src/lib.typ": *
 
-#let factur-x = read("factur-x.xml")
-#zugferd(factur-x)
+#let invoice-xml = read("factur-x.xml")
+#factur-x(invoice-xml, profiles.en16931)

@@ -1,6 +1,6 @@
 #let version = version(0, 1, 1)
 
-/// The ZUGFeRD / factur-x conformance profiles.
+/// The Factur-X / ZUGFeRD conformance profiles.
 #let profiles = (
   minimum: "MINIMUM",
   basic-wl: "BASIC WL",
@@ -10,30 +10,33 @@
   xrechnung: "XRECHNUNG",
 )
 
-/// Method to make the current document an electronic invoice following the ZUGFeRD standard
+/// Method to make the current document an electronic invoice following the
+/// Factur-X / ZUGFeRD standard.
+///
+/// Also available under the alias `zugferd`.
 ///
 /// ```typst
 /// #import "@preview/invoice-harness:0.1.1": *
 ///
-/// #let factur-x = read("factur-x.xml")
-/// #zugferd(factur-x, profiles.en16931)
+/// #let invoice-xml = read("factur-x.xml")
+/// #factur-x(invoice-xml, profiles.en16931)
 /// ```
-#let zugferd(
-  /// The ZUGFeRD xml
+#let factur-x(
+  /// The invoice XML to embed (the Factur-X / ZUGFeRD CII document).
   ///
   /// -> bytes | str
-  factur-x,
+  xml,
   /// The conformance profile of the invoice. Use one of the values from
   /// `profiles`, e.g. `profiles.en16931`.
   ///
   /// -> str
   profile,
-  /// The factur-x version, written to the metadata as `fx:Version`.
+  /// The Factur-X version, written to the metadata as `fx:Version`.
   ///
   /// Default: "1.0"
   ///
   /// -> str
-  version: "1.0",
+  fx-version: "1.0",
   /// Description of the file embedding
   ///
   /// Default: "ZUGFeRD Rechnung"
@@ -43,12 +46,12 @@
 ) = {
   assert(
     profile in profiles.values(),
-    message: "Unknown ZUGFeRD profile: "
+    message: "Unknown Factur-X / ZUGFeRD profile: "
       + repr(profile)
       + ". Use one of the values from `profiles`, e.g. `profiles.en16931`.",
   )
 
-  let factur-x = (
+  let fx-schema = (
     pdf
       .xmp
       .namespace(
@@ -71,17 +74,20 @@
   )
 
   set pdf.metadata(properties: (
-    factur-x.document-type("INVOICE"),
-    factur-x.document-file-name("factur-x.xml"),
-    factur-x.version(version),
-    factur-x.conformance-level(profile),
+    fx-schema.document-type("INVOICE"),
+    fx-schema.document-file-name("factur-x.xml"),
+    fx-schema.version(fx-version),
+    fx-schema.conformance-level(profile),
   ))
 
   pdf.embed(
     "../factur-x.xml",
-    factur-x,
+    xml,
     mime-type: "text/xml",
     relationship: "alternative",
     description: description,
   )
 }
+
+/// Alias for `factur-x`, using the German name for the standard.
+#let zugferd = factur-x
