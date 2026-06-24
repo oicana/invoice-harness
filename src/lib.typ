@@ -56,7 +56,7 @@
       .xmp
       .namespace(
         prefix: "fx",
-        url: "urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#",
+        uri: "urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#",
         name: "Factur-X PDFA Extension Schema",
       )
       .schema(
