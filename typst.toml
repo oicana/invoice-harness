@@ -10,4 +10,4 @@ repository = "https://github.com/oicana/invoice-harness"
 keywords = ["zugferd", "invoice"]
 categories = ["scripting", "utility"]
 compiler = "0.13.0"
-exclude = ["tests/**", "scripts/**", "tools/**", "out/**", ".github/**"]
+exclude = ["tests", "scripts", "tools", "out", ".github"]
