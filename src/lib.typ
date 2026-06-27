@@ -1,5 +1,8 @@
 #let version = version(0, 1, 1)
 
+#let pdf-keys = dictionary(pdf).keys()
+#let supports-pdf-metadata = "metadata" in pdf-keys and "xmp" in pdf-keys
+
 /// The Factur-X / ZUGFeRD conformance profiles.
 #let profiles = (
   minimum: "MINIMUM",
@@ -51,8 +54,12 @@
       + ". Use one of the values from `profiles`, e.g. `profiles.en16931`.",
   )
 
-  let fx-schema = (
-    pdf
+  // The XMP metadata relies on `pdf.metadata` / `pdf.xmp`, which currently only exist in
+  // the temporary Typst fork (https://github.com/oicana/typst). On "normal"
+  // Typst we skip it and embed the XML below without the metadata; the document
+  // still compiles, but the PDF is not a fully conformant Factur-X invoice.
+  if supports-pdf-metadata {
+    let fx-schema = pdf
       .xmp
       .namespace(
         prefix: "fx",
@@ -71,14 +78,14 @@
           description: "Conformance level of the invoice",
         ),
       )
-  )
 
-  set pdf.metadata(properties: (
-    fx-schema.document-type("INVOICE"),
-    fx-schema.document-file-name("factur-x.xml"),
-    fx-schema.version(fx-version),
-    fx-schema.conformance-level(profile),
-  ))
+    set pdf.metadata(properties: (
+      fx-schema.document-type("INVOICE"),
+      fx-schema.document-file-name("factur-x.xml"),
+      fx-schema.version(fx-version),
+      fx-schema.conformance-level(profile),
+    ))
+  }
 
   pdf.attach(
     "../factur-x.xml",
