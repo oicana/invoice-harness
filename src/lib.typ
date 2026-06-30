@@ -54,6 +54,13 @@
       + ". Use one of the values from `profiles`, e.g. `profiles.en16931`.",
   )
 
+  let data-only-profiles = (profiles.minimum, profiles.basic-wl)
+  let relationship = if profile in data-only-profiles {
+    "data"
+  } else {
+    "alternative"
+  }
+
   // The XMP metadata relies on `pdf.metadata` / `pdf.xmp`, which currently only exist in
   // the temporary Typst fork (https://github.com/oicana/typst). On "normal"
   // Typst we skip it and embed the XML below without the metadata; the document
@@ -91,7 +98,7 @@
     "../factur-x.xml",
     bytes(xml),
     mime-type: "text/xml",
-    relationship: "alternative",
+    relationship: relationship,
     description: description,
   )
 }
